@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عالم نَجم – معرض أعمالي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;800&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f0ff;--bg2:#e4ddff;--tx:#1c1840;--mut:#5d5890;--card:rgba(255,255,255,.7);--line:rgba(60,40,160,.18);--glow:#7c5cff;--dot:90,70,220;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0820;--bg2:#1a1245;--tx:#f1eeff;--mut:#a9a3d8;--card:rgba(30,24,80,.6);--line:rgba(160,140,255,.22);--glow:#9b86ff;--dot:190,175,255}}
+:root[data-theme="dark"]{--bg:#0a0820;--bg2:#1a1245;--tx:#f1eeff;--mut:#a9a3d8;--card:rgba(30,24,80,.6);--line:rgba(160,140,255,.22);--glow:#9b86ff;--dot:190,175,255}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:"Tajawal",Tahoma,sans-serif;color:var(--tx);background:radial-gradient(120% 90% at 50% 0%,var(--bg2),var(--bg));overflow:hidden;-webkit-tap-highlight-color:transparent}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--glow);outline-offset:3px}
+.view{position:fixed;inset:0;z-index:2;overflow-y:auto;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);opacity:0;visibility:hidden;transform:scale(.97);transition:opacity .5s,transform .5s,visibility .5s}
+.view.on{opacity:1;visibility:visible;transform:none}
+/* intro */
+#intro{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 22px 9vh}
+#intro h1{font-family:"Reem Kufi","Tajawal",sans-serif;font-size:clamp(34px,7vw,64px);line-height:1.25;margin-top:20px}
+#intro p{color:var(--mut);max-width:30em;margin:12px 0 26px;line-height:1.9;min-height:3.8em}
+.btn{padding:14px 34px;border-radius:999px;background:linear-gradient(135deg,var(--glow),#ff7ac6);color:#fff;font-weight:800;font-size:18px;box-shadow:0 10px 40px -8px var(--glow);transition:transform .25s}
+.btn:hover{transform:translateY(-3px) scale(1.04)}
+.ghost{margin-top:14px;color:var(--mut);text-decoration:underline;padding:8px}
+/* mascot */
+#m{position:fixed;z-index:6;width:var(--w);left:50%;top:var(--t);transform:translate(-50%,0);transition:all .9s cubic-bezier(.7,0,.2,1);cursor:pointer;--w:min(46vw,200px);--t:max(8vh,calc(env(safe-area-inset-top,0px) + 30px))}
+#m.small{--w:84px;--t:calc(100dvh - 120px - env(safe-area-inset-bottom,0px));left:60px}
+#m svg{width:100%;display:block;overflow:visible;animation:fl 4s ease-in-out infinite}
+#m.hop svg{animation:hop .6s}
+@keyframes fl{50%{transform:translateY(-12px)}}
+@keyframes hop{30%{transform:translateY(-34px) scale(1.08,.92)}60%{transform:scale(.94,1.06)}}
+#hand{transform-origin:150px 118px;animation:wave 1s ease-in-out infinite alternate}
+#m.small #hand{animation:none}
+@keyframes wave{from{transform:rotate(-8deg)}to{transform:rotate(32deg)}}
+#bub{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:8px;width:max-content;max-width:min(78vw,300px);background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--line);padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.7;text-align:center;opacity:0;transition:opacity .3s;pointer-events:none}
+#bub.on{opacity:1}
+#m.small #bub{top:auto;bottom:100%;margin:0 0 8px;left:0;transform:none}
+#intro~#m #bub{display:block}
+/* world */
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;align-items:center;padding:12px 16px;background:linear-gradient(var(--bg),transparent);backdrop-filter:blur(8px)}
+.bar .home{flex:none;padding:9px 16px;border-radius:999px;background:var(--glow);color:#fff;font-weight:800}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.chips button{flex:none;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px;white-space:nowrap}
+.chips button.cur{border-color:var(--c);box-shadow:0 0 0 2px var(--c) inset}
+.wrap{max-width:1000px;margin:0 auto;padding:6px 18px 150px}
+.wrap h2{font-family:"Reem Kufi","Tajawal",sans-serif;font-size:clamp(28px,5vw,44px);margin:10px 0 4px}
+.sub{color:var(--mut);line-height:1.9;margin-bottom:22px}
+.portals{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+.portal{position:relative;min-height:150px;padding:20px 16px;text-align:right;color:var(--tx);background:linear-gradient(150deg,color-mix(in srgb,var(--c) 38%,transparent),var(--card));border:1px solid color-mix(in srgb,var(--c) 60%,transparent);overflow:hidden;transition:transform .35s,box-shadow .35s}
+.portal:hover,.portal:focus-visible{transform:translateY(-6px) rotate(-1deg);box-shadow:0 20px 50px -14px var(--c)}
+.portal i{font-style:normal;font-size:40px;display:block;margin-bottom:8px;filter:drop-shadow(0 0 14px var(--c))}
+.portal b{font-size:18px;display:block}
+.portal small{color:var(--mut);display:block;margin-top:4px;line-height:1.6}
+.portal:nth-child(1){border-radius:50px 14px 50px 14px}
+.portal:nth-child(2){border-radius:14px 50px 14px 50px}
+.portal:nth-child(3){border-radius:80px 80px 14px 14px}
+.portal:nth-child(4){border-radius:14px 14px 80px 80px}
+.portal:nth-child(5){border-radius:30px;clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%)}
+.portal:nth-child(6){border-radius:999px 14px 999px 14px}
+.portal:nth-child(7){grid-column:1/-1;border-radius:60px;min-height:110px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{text-align:right;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(8px);transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--c)}
+.art{height:120px;display:grid;place-items:center;font-size:46px;background:radial-gradient(circle at var(--x,30%) 20%,var(--c),transparent 75%),linear-gradient(var(--bg2),var(--bg))}
+.card div.tx{padding:14px 16px 18px}
+.card b{display:block;font-size:17px;margin-bottom:4px}
+.card span{color:var(--mut);font-size:14px;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tags em{font-style:normal;font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--line)}
+/* stars */
+.star{position:fixed;z-index:4;font-size:22px;opacity:.35;transition:all .3s;animation:tw 3s infinite alternate}
+.star:hover{opacity:1;transform:scale(1.7)}
+.star.got{opacity:0;pointer-events:none;transform:scale(3)}
+@keyframes tw{to{filter:brightness(2)}}
+#cnt{position:fixed;z-index:7;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--mut);background:var(--card);padding:6px 12px;border-radius:99px;border:1px solid var(--line);display:none}
+/* modal */
+#modal{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:16px;background:rgba(5,3,20,.6);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:.3s}
+#modal.on{opacity:1;visibility:visible}
+.box{width:min(560px,100%);max-height:88dvh;overflow:auto;background:var(--bg);border:1px solid var(--c);border-radius:26px;box-shadow:0 30px 90px -20px var(--c);transform:scale(.9) translateY(20px);transition:transform .35s}
+#modal.on .box{transform:none}
+.box .art{height:170px;font-size:70px}
+.box .in{padding:20px 22px 24px;line-height:1.9}
+.box h3{font-size:24px;margin-bottom:6px}
+.row{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.row button{padding:10px 18px;border-radius:99px;border:1px solid var(--line);background:var(--card)}
+.row .pri{background:var(--c);color:#fff;border-color:var(--c);font-weight:800}
+#toast{position:fixed;z-index:12;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,-80px);background:var(--glow);color:#fff;padding:10px 20px;border-radius:99px;transition:transform .4s}
+#toast.on{transform:translate(-50%,0)}
+@media(min-width:760px){.portals{grid-template-columns:repeat(3,1fr)}.portal:nth-child(7){grid-column:span 3}#m.small{--w:100px;left:70px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<main id="intro" class="view on">
+  <h1>أهلًا بك في عالمي</h1>
+  <p id="typ"></p>
+  <button class="btn" id="go">ابدأ رحلتك</button>
+  <button class="ghost" id="skip">تخطَّ المقدمة وادخل مباشرة</button>
+</main>
+
+<section id="world" class="view">
+  <nav class="bar"><span class="chips" id="chipsW"></span></nav>
+  <div class="wrap">
+    <h2>العالم الرئيسي</h2>
+    <p class="sub">سبع بوابات، لكل واحدة منها طابعها. اختر بوابة، وانتبه للنجوم الصغيرة المخبّأة في الأرجاء.</p>
+    <div class="portals" id="portals"></div>
+  </div>
+</section>
+
+<section id="sec" class="view">
+  <nav class="bar"><button class="home" id="home">العودة إلى العالم</button><span class="chips" id="chips"></span></nav>
+  <div class="wrap"><h2 id="st"></h2><p class="sub" id="sd"></p><div class="cards" id="cards"></div></div>
+</section>
+
+<div id="m" aria-label="نَجم، مرشدك في العالم">
+  <svg viewBox="0 0 200 220" aria-hidden="true">
+    <defs>
+      <radialGradient id="g1" cx="40%" cy="30%"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#b9a8ff"/><stop offset="1" stop-color="#5b3df0"/></radialGradient>
+      <radialGradient id="g2"><stop offset="0" stop-color="#9b86ff" stop-opacity=".55"/><stop offset="1" stop-color="#9b86ff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="100" cy="115" r="98" fill="url(#g2)"/>
+    <line x1="100" y1="36" x2="100" y2="14" stroke="#b9a8ff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="100" cy="11" r="8" fill="#ff7ac6"/>
+    <ellipse cx="100" cy="195" rx="40" ry="7" fill="#000" opacity=".18"/>
+    <circle cx="100" cy="115" r="72" fill="url(#g1)"/>
+    <ellipse cx="100" cy="112" rx="50" ry="38" fill="#150f4a"/>
+    <g id="eyes"><ellipse cx="80" cy="108" rx="13" ry="16" fill="#fff"/><ellipse cx="120" cy="108" rx="13" ry="16" fill="#fff"/>
+    <circle class="pp" cx="80" cy="108" r="7" fill="#2a1a8a"/><circle class="pp" cx="120" cy="108" r="7" fill="#2a1a8a"/></g>
+    <path d="M86 132q14 12 28 0" stroke="#ff7ac6" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="58" cy="128" r="7" fill="#ff7ac6" opacity=".5"/><circle cx="142" cy="128" r="7" fill="#ff7ac6" opacity=".5"/>
+    <g id="hand"><ellipse cx="168" cy="108" rx="13" ry="20" fill="#c9bcff"/></g>
+  </svg>
+  <div id="bub" role="status"></div>
+</div>
+<div id="cnt"></div>
+<div id="modal" role="dialog" aria-modal="true"><div class="box" id="box"></div></div>
+<div id="toast"></div>
+
+<script>
+/* ====== أضف أعمالك هنا: غيّر النصوص أو أضف عناصر جديدة إلى items ====== */
+const S=[
+{id:'design',n:'معرض التصاميم الرقمية',i:'🎨',c:'#ff5fb5',b:'ألوان وخطوط وهويات',d:'تصاميم هويات وشعارات وواجهات صُنعت بعناية في التفاصيل.',say:'هنا تسكن الألوان! تفضّل بالدخول.',items:[
+{t:'هوية مقهى الغروب',d:'هوية بصرية كاملة بدرجات الغروب.',tag:['هوية','شعار'],x:'تضم الشعار، الألوان، الخطوط، وتطبيقاتها على الأكواب والقوائم. استبدل هذا النص بوصف مشروعك الحقيقي.',e:'☕'},
+{t:'ملصق مهرجان الحروف',d:'ملصق تجريبي بالخط العربي.',tag:['ملصق','خط عربي'],x:'عمل تجريبي يمزج بين الخط الكوفي والتدرجات اللونية الحديثة.',e:'🔤'},
+{t:'واجهة تطبيق وجهتي',d:'تصميم شاشات تطبيق سفر.',tag:['واجهات','UX'],x:'رحلة مستخدم من البحث حتى الحجز، مع نظام تصميم متكامل.',e:'🧭'}]},
+{id:'ai',n:'مشاريع الذكاء الاصطناعي',i:'🤖',c:'#34e0c8',b:'نماذج وأدوات ذكية',d:'تجارب تستثمر الذكاء الاصطناعي في حل مشكلات حقيقية.',say:'أحب هذه البوابة، فيها أقاربي!',items:[
+{t:'مساعد المذاكرة الذكي',d:'يلخّص الدروس ويولّد أسئلة تدريبية.',tag:['LLM','تعليم'],x:'أداة تحوّل المحتوى الدراسي إلى بطاقات ومراجعات مخصصة لكل طالب.',e:'📚'},
+{t:'مصنّف الصور العربي',d:'تعرّف على الأشياء مع وصف بالعربية.',tag:['رؤية حاسوبية'],x:'نموذج تجريبي يصف الصور بجمل عربية سليمة.',e:'👁️'},
+{t:'كاتب الحكايات',d:'يؤلّف قصصًا قصيرة للأطفال.',tag:['توليد نصوص'],x:'يختار الطفل الشخصيات والمكان، ويولّد النظام قصة قصيرة مصورة.',e:'📖'}]},
+{id:'edu',n:'المشاريع التعليمية',i:'🎓',c:'#ffc233',b:'دروس وأنشطة ومناهج',d:'محتوى تعليمي مصمّم ليُفهم بسهولة ويُحَب.',say:'التعلّم مغامرة. هيا نكتشفها!',items:[
+{t:'منهج الأرقام بالألعاب',d:'سلسلة أنشطة للصفوف الأولى.',tag:['رياضيات','ألعاب'],x:'ثلاثون نشاطًا تفاعليًا مع دليل للمعلّم.',e:'🔢'},
+{t:'حقيبة العلوم المنزلية',d:'تجارب بسيطة بأدوات متوفرة.',tag:['علوم'],x:'عشر تجارب مصوّرة بخطوات واضحة وأسئلة للنقاش.',e:'🧪'},
+{t:'ورشة التفكير الإبداعي',d:'خطة ورشة مدتها ساعتان.',tag:['ورش','مهارات'],x:'أنشطة جماعية وأدوات تقييم جاهزة للطباعة.',e:'💡'}]},
+{id:'media',n:'العروض التقديمية والوسائط',i:'🎬',c:'#ff8a4c',b:'شرائح ومقاطع وصوتيات',d:'عروض ومقاطع تحكي القصة بصريًا.',say:'أضواء، كاميرا، انطلاق!',items:[
+{t:'عرض رؤية 2030 المبسّط',d:'عرض بصري بالإنفوجرافيك.',tag:['عرض','إنفوجرافيك'],x:'اثنتان وعشرون شريحة بإيقاع بصري متدرّج.',e:'📊'},
+{t:'فيديو تعريفي قصير',d:'موشن جرافيك مدته دقيقة.',tag:['فيديو','موشن'],x:'سيناريو ورسوم متحركة وتعليق صوتي.',e:'🎞️'},
+{t:'بودكاست حكاية تقنية',d:'حلقات عن قصص التقنية.',tag:['صوت'],x:'ثماني حلقات مع غلاف مخصص لكل حلقة.',e:'🎙️'}]},
+{id:'tech',n:'المشاريع التقنية والتجارب',i:'🧪',c:'#6aa6ff',b:'أكواد وتجارب وأفكار',d:'مختبر صغير للأفكار التقنية الجريئة.',say:'مختبر التجارب! لا تلمس الزر الأحمر.',items:[
+{t:'لعبة مدينة النجوم',d:'لعبة ويب بسيطة بالجافاسكربت.',tag:['JavaScript','ألعاب'],x:'لعبة استكشاف بخريطة تتولّد عشوائيًا.',e:'🎮'},
+{t:'لوحة متابعة العادات',d:'تطبيق يتابع عاداتك اليومية.',tag:['React','واجهات'],x:'رسوم بيانية أسبوعية وتذكيرات لطيفة.',e:'✅'},
+{t:'ساعة الصلاة التفاعلية',d:'ويدجت لمواقيت الصلاة.',tag:['ويب','API'],x:'تصميم هادئ مع عدّاد للصلاة القادمة.',e:'🕌'}]},
+{id:'cv',n:'ملف الإنجاز',i:'🏆',c:'#b08cff',b:'شهادات ونجاحات',d:'محطات وإنجازات وشهادات رسمتُ بها الطريق.',say:'وهنا نحتفل بالإنجازات!',items:[
+{t:'شهادة تصميم تجربة المستخدم',d:'دورة معتمدة، 2025.',tag:['شهادة'],x:'استبدل هذا بشهادتك وتاريخها والجهة المانحة.',e:'📜'},
+{t:'جائزة أفضل مشروع تقني',d:'المركز الأول في مسابقة المدرسة.',tag:['جائزة'],x:'وصف موجز للمسابقة والمشروع الفائز.',e:'🥇'},
+{t:'قيادة فريق التطوع',d:'قيادة فريق من اثني عشر متطوعًا.',tag:['قيادة'],x:'ملخص للأثر والنتائج المحققة.',e:'🤝'}]},
+{id:'me',n:'من أنا؟',i:'🌟',c:'#ff6b6b',b:'قصتي باختصار',d:'تعرّف على صاحب هذا العالم.',say:'أخيرًا، صاحب العالم! سأتركك معه.',items:[
+{t:'نبذة عني',d:'مبدع يجمع التقنية بالتعليم.',tag:['نبذة'],x:'اكتب هنا نبذة تعريفية عنك: اسمك، اهتماماتك، وما يميّزك.',e:'🙋'},
+{t:'مهاراتي',d:'تصميم، برمجة، تعليم، ذكاء اصطناعي.',tag:['مهارات'],x:'عدّد مهاراتك وأدواتك المفضلة ومستوى خبرتك.',e:'🛠️'},
+{t:'تواصل معي',d:'ابدأ حوارًا أو تعاونًا.',tag:['تواصل'],x:'أضف بريدك وحساباتك. يمكنك أيضًا ربط زر «فتح» برابط حقيقي بإضافة حقل url للعمل.',e:'💌'}]}
+];
+const $=s=>document.querySelector(s),V={intro:$('#intro'),world:$('#world'),sec:$('#sec')},M=$('#m'),B=$('#bub');
+const lines=['أنا نَجم، مرشدك في هذا العالم الرقمي.','هنا تسكن التصاميم والأفكار والتجارب.','هل أنت مستعد لاكتشاف كل شيء؟'];
+let btm,ti=0,cur=null;
+function say(t,ms=3200){B.textContent=t;B.classList.add('on');clearTimeout(btm);btm=setTimeout(()=>B.classList.remove('on'),ms)}
+function hop(){M.classList.remove('hop');void M.offsetWidth;M.classList.add('hop')}
+function show(k){for(const x in V)V[x].classList.toggle('on',x===k);M.classList.toggle('small',k!=='intro');$('#cnt').style.display=k==='intro'?'none':'block';document.querySelectorAll('.star').forEach(s=>s.style.display=k==='intro'?'none':'')}
+/* typing intro */
+function type(){const p=$('#typ'),t=lines[ti%lines.length];p.textContent='';let i=0;const h=setInterval(()=>{p.textContent=t.slice(0,++i);if(i>=t.length){clearInterval(h);ti++;setTimeout(()=>V.intro.classList.contains('on')&&type(),1800)}},55)}
+/* world */
+$('#portals').innerHTML=S.map(s=>`<button class="portal" style="--c:${s.c}" data-id="${s.id}"><i>${s.i}</i><b>${s.n}</b><small>${s.b}</small></button>`).join('');
+const chips=()=>S.map(s=>`<button data-id="${s.id}" style="--c:${s.c}" class="${s.id===cur?'cur':''}">${s.i} ${s.n}</button>`).join('');
+$('#chipsW').innerHTML=chips();
+document.addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){location.hash=b.dataset.id}});
+$('#home').onclick=()=>location.hash='world';
+function route(){
+  const h=location.hash.slice(1),s=S.find(x=>x.id===h);
+  if(s){cur=s.id;$('#chips').innerHTML=chips();$('#st').textContent=s.n;$('#sd').textContent=s.d;
+    $('#cards').innerHTML=s.items.map((it,i)=>`<button class="card" style="--c:${s.c}" data-i="${i}"><div class="art" style="--x:${20+i*30}%">${it.e}</div><div class="tx"><b>${it.t}</b><span>${it.d}</span><div class="tags">${it.tag.map(t=>`<em>${t}</em>`).join('')}</div></div></button>`).join('');
+    $('#sec').scrollTop=0;show('sec');hop();say(s.say)}
+  else if(h==='world'){cur=null;show('world');say('اختر بوابة، أو ابحث عن النجوم!')}
+  else show('intro');
+}
+addEventListener('hashchange',route);
+/* modal */
+let ms=null,mi=0;
+$('#cards').addEventListener('click',e=>{const c=e.target.closest('.card');if(c){ms=S.find(x=>x.id===cur);openM(+c.dataset.i)}});
+function openM(i){mi=(i+ms.items.length)%ms.items.length;const it=ms.items[mi];
+  $('#box').style.setProperty('--c',ms.c);
+  $('#box').innerHTML=`<div class="art">${it.e}</div><div class="in"><h3>${it.t}</h3><p>${it.x}</p><div class="tags">${it.tag.map(t=>`<em>${t}</em>`).join('')}</div><div class="row"><button class="pri" id="cp">نسخ الوصف</button><button id="pv">السابق</button><button id="nx">التالي</button><button id="cl">إغلاق</button></div></div>`;
+  $('#modal').classList.add('on');say('اختيار موفّق!',1800);
+  $('#cl').onclick=closeM;$('#pv').onclick=()=>openM(mi-1);$('#nx').onclick=()=>openM(mi+1);
+  $('#cp').onclick=()=>{const t=it.t+' – '+it.x;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('تم نسخ الوصف'),()=>toast('تعذّر النسخ تلقائيًا'))}}
+function closeM(){$('#modal').classList.remove('on')}
+$('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};
+addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+function toast(t){const o=$('#toast');o.textContent=t;o.classList.add('on');setTimeout(()=>o.classList.remove('on'),1800)}
+/* buttons */
+$('#go').onclick=()=>{say('رائع! اتبعني.',1200);hop();setTimeout(()=>location.hash='world',700)};
+$('#skip').onclick=()=>location.hash='world';
+const talk=['لا تضغط عليّ بقوة، أنا حسّاس!','هل وجدت النجوم الخمس؟','سرّ صغير: ابحث بين الأركان.','أنا أراقب مؤشرك دائمًا.','هيا إلى بوابة جديدة!'];
+M.onclick=()=>{hop();say(talk[Math.random()*talk.length|0])};
+/* eyes follow pointer */
+addEventListener('pointermove',e=>{const r=M.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,a=Math.atan2(e.clientY-cy,e.clientX-cx);
+  document.querySelectorAll('.pp').forEach((p,i)=>{p.setAttribute('transform',`translate(${Math.cos(a)*5},${Math.sin(a)*6})`)});px=e.clientX;py=e.clientY});
+/* hidden stars */
+let found=0;const cnt=$('#cnt');cnt.textContent='نجوم مخبّأة: 0/5';
+[[8,22],[88,38],[14,62],[82,78],[50,90]].forEach(([x,y],i)=>{const b=document.createElement('button');b.className='star';b.textContent='✦';b.setAttribute('aria-label','نجمة مخبّأة');b.style.cssText=`left:${x}%;top:${y}%;color:hsl(${40+i*60},90%,65%);animation-delay:${i*.6}s;display:none`;
+  b.onclick=()=>{b.classList.add('got');found++;cnt.textContent='نجوم مخبّأة: '+found+'/5';hop();say(found<5?'وجدتَ نجمة! تبقّى '+(5-found):'وجدتَ كل النجوم! أنت مستكشف حقيقي ✨',3500);if(found===5)burst()};document.body.append(b)});
+function burst(){for(let i=0;i<60;i++)P.push({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*14,vy:(Math.random()-.5)*14-3,r:3+Math.random()*3,life:90,hot:1})}
+/* background particles */
+const cv=$('#bg'),cx=cv.getContext('2d');let P=[],px=-999,py=-999,W,H;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=P.filter(p=>p.hot);for(let i=0;i<Math.min(90,W/10);i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+.6})}
+addEventListener('resize',rs);rs();
+(function loop(){cx.clearRect(0,0,W,H);const c=getComputedStyle(document.documentElement).getPropertyValue('--dot').trim()||'150,130,255';
+  for(const p of P){const dx=p.x-px,dy=p.y-py,d=Math.hypot(dx,dy);if(d<130&&!p.hot){p.vx+=dx/d*.05;p.vy+=dy/d*.05}
+    p.x+=p.vx;p.y+=p.vy;if(p.hot){p.vy+=.15;p.life--}else{p.vx*=.995;p.vy*=.995;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0}
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.3);cx.fillStyle=p.hot?`hsla(${p.life*5},90%,65%,${p.life/90})`:`rgba(${c},.55)`;cx.fill()}
+  P=P.filter(p=>!p.hot||p.life>0);requestAnimationFrame(loop)})();
+/* start */
+route();type();setTimeout(()=>say('مرحبًا بك! أنا نَجم 👋',3500),900);
+</script>
+</body>
+</html>
